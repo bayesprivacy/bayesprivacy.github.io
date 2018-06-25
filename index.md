@@ -4,8 +4,8 @@
 
 *Abstract*. 
 
-We propose a novel method to protect privacy for Bayesian inference.  We first transform the log-likelihood function into a bounded function using a sanitizer function. Then, we use mean field variational inference to approximate the posterior distribution. Next, we use the exponential mechanism with Kullback–Leibler divergence as the utility function to define a probability distribution of all mean-field approximations. 
-Finally, we use stochastic gradient Langevin dynamics to draw a random mean field approximation from the probability distribution defined by the exponential mechanism with Kullback–Leibler divergence. The random mean field approximation guarantees differential privacy for individuals in the dataset.
+We propose a novel method to protect privacy for Bayesian inference.  We first transform the log-likelihood function into a bounded function using a sanitizer function. Then, we use mean field variational inference to approximate the posterior distribution. Next, we use the exponential mechanism with Kullback–Leibler divergence as the utility function to define a probability distribution regarding all mean-field approximations. 
+Finally, we use stochastic gradient Langevin dynamics to draw a random mean field approximation from the probability distribution defined by the exponential mechanism. The random mean field approximation guarantees differential privacy for individuals in the dataset.
 
 
 
@@ -25,25 +25,25 @@ $$
 P(x) =  \int_\theta P(x \mid \theta) P(\theta) d\theta
 $$
 
-However,  this integral is untractable in general. There are two general approach to tackle this problem: (1) monte carlo markov chains (MCMC) algorithm and (2) variational inference (VI). MCMC algorithm constructs a markov chain whose statationary distribution is $$P(\theta \mid x)$$. Meanwhile, VI approximates $$P(\theta \mid x)$$ by a parametrized  and tractable distribution $$Q(\theta \mid z)$$ such that $$Q(\theta \mid z)$$ is as close as possible to $$P(\theta \mid x)$$.
+However,  this integral is untractable in general. There are two general approaches to tackle this problem: (1) monte carlo markov chain (MCMC) and (2) variational inference (VI).  MCMC algorithm constructs a markov chain whose statationary distribution is $$P(\theta \mid x)$$. Meanwhile, VI approximates $$P(\theta \mid x)$$ by a parametrized  and tractable distribution $$Q(\theta \mid z)$$ such that $$Q(\theta \mid z)$$ is as close as possible to $$P(\theta \mid x)$$.
 
-Here, we aim to protect the privacy of individuals in the dataset, which is used by Bayesian inference as of the observed data $$x$$. Especially, we aim to guarantee differential privacy for Bayesian inference.  Differential privacy is a robust and mathematical definition of privacy protection which guarantees that each individual's data does not much influent on the soon-be-published information which is extracted from the dataset of these individuals. Let $$z$$ be the information which is extracted from the dataset $$x$$.  Differential privacy constructs a probability distribution  $$P(z \mid x)$$ which is the distribution of $$z$$ given $$x$$. The bits of information will be published is a random sample of $$P(z \mid x)$$:
+Here, we aim to protect the privacy of individuals in the dataset, which is essentially the observed data $$x$$. Especially, we aim to guarantee differential privacy for Bayesian inference.  Differential privacy is a robust and mathematical definition of privacy protection which guarantees that each individual's data does not much influent on the useful information which is extracted from the dataset of these individuals. Let $$z$$ be the information which is extracted from the dataset $$x$$.  Differential privacy constructs a probability distribution $$P(z \mid x)$$  of $$z$$ given $$x$$. The information, which will be published, is a random sample of this distribution:
 
 $$
 z_{priv} \sim P(z \mid x)
 $$
 
-Differential privacy guarantees that for any two neighbouring dataset $$x$$ and $$x^\prime$$ which are different at only one data record, $$P(z\mid x)$$ and $$P(z \mid x^\prime)$$ are close to each other. For any neighbouring dataset $$x$$ and $$x^\prime$$, and for any $$z$$:
+Differential privacy guarantees that for any two neighbouring datasets$$x$$ and $$x^\prime$$, which differ at only one data record, $$P(z\mid x)$$ and $$P(z \mid x^\prime)$$ are close to each other. Formally, for any neighbouring datasets $$x$$ and $$x^\prime$$, and for any $$z$$:
 
 $$
 P(z \mid x) \leq \exp(\epsilon) \cdot P(z \mid x^\prime)
 $$
 
-Here, $$\epsilon$$ is called the privacy budget. Low $$\epsilon$$ guarantees strong privacy, otherwise high $$\epsilon$$ guarantees weak privacy.
+Here, $$\epsilon$$ is called the privacy budget. Low $$\epsilon$$ guarantees strong privacy, otherwise, high $$\epsilon$$ guarantees weak privacy.
 
-In this work, $$z$$, which is the extracted information from dataset $$x$$, is actually the parameter vector of the mean field variational distribution $$Q(\theta \mid z)$$. In other words, we aim to guarantee that publishing parameters of the approximated posterior distribution will not compromise the privacy of individuals data record in $$x$$.
+In this work, $$z$$,  which is extracted from dataset $$x$$, is actually the parameter vector $z$ of the mean field variational distribution $$Q(\theta \mid z)$$. In other words, we aim to guarantee that publishing parameters of the approximated posterior distribution will not compromise the privacy of individuals in dataset $$x$$.
 
-There are previous works related to this problem. Wang et al. <dt-cite key="wang2015privacy"></dt-cite> are the first to prove that sampling a single random sample from the posterior distribution guarantees differential privacy under some conditions. The authors use stochastic gradient Monte-Carlo to sample the posterior distribution. Park et al. <dt-cite key="park2016variational"></dt-cite> proposed that for variational inference with conjugate exponential (CE) family, it is enough for guaranteeing differential privacy by perturbing the expected sufficient statistics of the complete-data likelihood. Jalko et al. <dt-cite key="jalko2017differentially"></dt-cite>  proposed to guarantee differential privacy for variational inference with non-conjugate models by a Gaussian mechanism which adds Gaussian noise to the gradient vector at each step of the optimization procedure.   
+There are previous works related to this problem. Wang *et al.* <dt-cite key="wang2015privacy"></dt-cite> are the first to prove that sampling a single random sample from the posterior distribution guarantees differential privacy under some conditions. The authors use stochastic gradient Monte-Carlo to sample the posterior distribution. Park *et al.* <dt-cite key="park2016variational"></dt-cite> proposed that for variational inference with conjugate exponential (CE) family, it is enough for guaranteeing differential privacy by perturbing the expected sufficient statistics of the complete-data likelihood. Jalko *et al.* <dt-cite key="jalko2017differentially"></dt-cite>  proposed to guarantee differential privacy for variational inference with non-conjugate models by a Gaussian mechanism which adds Gaussian noise to the gradient vector at each step of the optimization procedure.   
 
 
 <script type="text/front-matter">
@@ -82,7 +82,7 @@ There are previous works related to this problem. Wang et al. <dt-cite key="wang
 
 ## Method
 
-The main idea of our method is to use exponential mechanism to define a probability distribution of vector $$z$$ with the utility function $$U(z; x)$$ based on the Kullback–Leibler divergence score. The probability density function of $$z$$ is defined as follows:
+The main idea of our method is to use the exponential mechanism to define a probability distribution of  $$z$$ with the utility function $$U(z; x)$$ based on the Kullback–Leibler divergence score. The probability density function of $$z$$ is defined as follows:
 
 $$
 f_Z(z) \propto \exp\left( \frac{U(z; x)}{2\Delta_U} \cdot \epsilon\right) 
@@ -94,13 +94,9 @@ $$
 \Delta_U = \max_{z, x, x^\prime} \left| U(z; x) - U(z; x^\prime) \right|
 $$
 
-It is proven that a random sample from above distribution guarantees $$\epsilon$$-differential privacy. 
+It is proven that a random sample from the above distribution guarantees $$\epsilon$$-differential privacy. 
 
-
-
-
-
-Here, we define the utility function equal to the variational lowerbound as follows: 
+Here, we use the variational lowerbound as the utility function: 
 
 $$
 \begin{align}
@@ -109,25 +105,23 @@ U(z; x) &= \log\left( P(x) \right) - D_{KL} \left( Q(\theta \mid z) ~\|~ P(\thet
 \end{align}
 $$
 
-
-
 Then, the sensitivity of $$U$$ is
 
 $$
 \Delta_U = \max_{z, x, x^\prime}  \left| \mathrm{E}_Q \left[  \log\left(P(x \mid \theta\right) - \log\left(P(x^\prime \mid \theta) \right)\right] \right|
 $$
 
-Let $$\ell(\theta; x_i)$$ is the log-likelihood of function of $$i^{th}$$ data record, then 
+Let $$\ell(\theta; x_i)$$ be the log-likelihood of function of $$i^{th}$$ data record. Then, 
 
 $$ P(x \mid \theta) = \sum_{i=1}^n \ell(\theta; x_i)$$ 
 
-where $$n$$ is the size of dataset $$x$$. Now, assuming that two neightbouring dataset $$x$$ and $$x^\prime$$ are differ at only $$x_n$$ and $$x^\prime_n$$,
+where $$n$$ is the size of dataset $$x$$. Now, assuming that two neightbouring datasets $$x$$ and $$x^\prime$$ are differ at only $$x_n$$ and $$x^\prime_n$$,
 
 $$
 \Delta_U = \max_{z, x, x^\prime} \left | \mathrm{E}_Q \left[ \ell(\theta; x_n) - \ell(\theta; x_n^\prime)\right] \right|
 $$
 
-So, the objective here is to bound $$\Delta_U$$ by a finite number. We here achive that by approximate $$\ell(\theta; x_i)$$ by a finite log-likelihood function  $$\gamma(\theta; x_i)$$ as follows:
+So, the objective here is to bound $$\Delta_U$$ by a finite number. We  achieve that by approximating $$\ell(\theta; x_i)$$ by a finite log-likelihood function  $$\gamma(\theta; x_i)$$ as follows:
 
 $$
 \gamma(\theta; x_i) = \tau \cdot \textrm{tanh}\left( \frac{\ell(\theta; x_i)}{\tau} \right)
@@ -204,7 +198,7 @@ plt.show()
 ![png](Variational_Inference_files/Variational_Inference_9_0.png)
 
 
-The idea here is to keep the shape of the log-likelihood function $$\ell(\cdot)$$ at *important values* near $$0$$ and deform the function at other values to keep it finite.
+The main idea here is to keep the shape of the log-likelihood function $$\ell(\cdot)$$ at *important values* near $$0$$ and bending the function at other values to keep it finite.
 
 It is then guaranteed that by using $$\gamma$$ instead of $$\ell$$ as the log-likelihood function,
 
@@ -212,7 +206,7 @@ $$
 \Delta_U \leq 2\tau
 $$
 
-Next, we now aim to draw a random sample from $$f_Z(z)$$, we use stochastic gradient langevin dynamics (SGLD) to achieve this goal. The basic idea of SGLD is that a particle will follow the noisy gradient of its current location, which is adding a Gaussian noise to the gradient. After a long time, the probability distribution of the particle converges to the distribution we want. In our case, we have:
+Next, we now aim to draw a random sample from $$f_Z(z)$$. We will use stochastic gradient Langevin dynamics (SGLD) to achieve this goal. The basic idea of SGLD is simulating a particle in a physical system. At each timestep, the particle follows a noisy gradient of the potential energy function at its current location.  The probability distribution of the particle will converge to the distribution specified by the potential energy function. In our case, we have:
 
 $$
 z_{t+1} = z_t + \frac{\epsilon}{2\Delta_U}\cdot \nabla U(z; x) \cdot \delta_t + r \cdot \sqrt{2 \delta_t}
@@ -220,7 +214,7 @@ $$
 
 where $$r \sim \mathcal N(0, 1)$$ and $$\delta_t$$ is the step size at time $$t$$.
 
-We here assume that we can use the reparameterization trick for the probability $$Q(\theta \mid z )$$. In other words, we assume that we can represent $$Q$$ as follows:
+We here assume that we can use the reparameterization trick for the probability $$Q(\theta \mid z )$$, that we can represent $$Q$$ as follows:
 
 $$
 \begin{align}
@@ -235,7 +229,7 @@ $$
 U(z; x) \approx  \frac 1 L \sum_{i=1}^L  \left(\log\left(P(x \mid \theta_i)\right) + \log\left( P(\theta_i)\right)  - \log\left(Q(\theta_i \mid z)\right)  \right)
 $$
 
-where $$\theta_i = g(z, r_i)$$ and $$r_i \sim P(r)$$. This approximate allows us to estimate the gradient of $$U(z; x)$$.
+where $$\theta_i = g(z, r_i)$$ and $$r_i \sim P(r)$$. This approximation allows us to estimate the gradient of $$U(z; x)$$.
 
 ## Experiments
 
