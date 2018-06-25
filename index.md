@@ -312,7 +312,10 @@ _ = plt.scatter(X[:, 1], Y[:,0])
 ![png](Variational_Inference_files/Variational_Inference_14_0.png)
 
 
-
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+  
 ```python
 #@title Posterior function
 
@@ -373,43 +376,8 @@ if isCuda:
     theta = theta.data.cuda()
 theta.requires_grad= True
 ```
-
-
-```python
-#@title
-def computeK(p):
-    return torch.sum(torch.pow(p,2) / 2.0).data
-
-def computeU(theta, data):
-    return -log_posterior(theta, data)
-
-def computeH(theta, p, data):
-    return computeK(p) + computeU(theta, data)
-
-
-def gradientOfU(theta, data):
-    theta.requires_grad= True
-    if torch.is_tensor(theta.grad):
-        theta.grad.zero_()
-    out = computeU(theta, data)
-    out.backward()
-    theta.requires_grad= False
-    return theta.grad.data
-
-def gradientOfK(p):
-    return p
-
-data.requires_grad = False
-!pip install tqdm
-import tqdm
-```
-
-    
-
-
-    Requirement already satisfied: tqdm in ./anaconda3/lib/python3.6/site-packages (4.11.2)
-    [31mdistributed 1.22.0 requires msgpack, which is not installed.[0m
-
+</div>
+</details>
 
 ### Maximum-a-posteriori (MAP) estimation
 
@@ -425,14 +393,13 @@ for t in tqdm.tqdm(range(100000)):
 
 print(loss.item())
 ```
-100%|██████████| 100000/100000 [01:16<00:00, 1311.62it/s]
 
+
+    100%|██████████| 100000/100000 [01:16<00:00, 1311.62it/s]
     -1.8227145671844482
 
 
     
-
-
 
 ```python
 #@title
@@ -453,11 +420,6 @@ print( "a = %f\nb=%f\nintercept=%f\nsigma=%f" % (theta[0,0].item(),
 #@title
 !pip install pystan
 ```
-
-    Requirement already satisfied: pystan in ./anaconda3/lib/python3.6/site-packages (2.17.1.0)
-    Requirement already satisfied: Cython!=0.25.1,>=0.22 in ./anaconda3/lib/python3.6/site-packages (from pystan) (0.28.3)
-    Requirement already satisfied: numpy>=1.7 in ./anaconda3/lib/python3.6/site-packages (from pystan) (1.14.5)
-    [31mdistributed 1.22.0 requires msgpack, which is not installed.[0m
 
 
 
@@ -490,6 +452,10 @@ model {
 }
 """
 
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+
 ## sm = pystan.StanModel(model_code=linreg_code)
 #@title
 X = data[:, 0:2]
@@ -517,6 +483,8 @@ mytheta[:, 2]   = torch.from_numpy(samples['intercept'])
 mytheta[:, 3]   = torch.from_numpy(samples['sigma'])
 ```
 
+</div>
+</details>
 
 ![png](Variational_Inference_files/Variational_Inference_22_0.png)
 
@@ -524,6 +492,10 @@ mytheta[:, 3]   = torch.from_numpy(samples['sigma'])
 ### Variational Inference
 
 
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+  
 ```python
 #@title
 
@@ -591,6 +563,9 @@ def AEVI():
     return tau, logsigma
 ```
 
+</div>
+</details>
+
 
 ```python
 tau, logsigma = AEVI()
@@ -603,6 +578,9 @@ tau, logsigma = AEVI()
 
     
 
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
 
 
 ```python
@@ -648,6 +626,9 @@ for id in range(4):
 
 ```
 
+</div>
+</details>
+
 
 ![png](Variational_Inference_files/Variational_Inference_27_0.png)
 
@@ -665,6 +646,12 @@ for id in range(4):
 
 
 
+
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+  
+  
 ```python
 #@title
 logsigma_bak = logsigma.clone()
@@ -768,6 +755,10 @@ def AEVI_SGLD():
     return samples
 ```
 
+</div>
+</details>
+
+
 
 ```python
 samples = AEVI_SGLD()
@@ -793,6 +784,10 @@ for id in range(4):
 
 
 
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+  
 ```python
 import tensorflow as tf
 import math
@@ -929,6 +924,8 @@ print(ms)
      [-3.2393332]]
 
 
+</div>
+</details>
     
 
 
