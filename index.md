@@ -135,8 +135,11 @@ $$
 
 where $$[-\tau; \tau]$$ is the range of $$\gamma(\cdot)$$. The below figure shows the effect of the approximation to an identity function with $$\tau = 2.0$$:
 
-<details><summary>Click to see code</summary>
+<details>
   
+<summary>Click to see code</summary>
+
+
 ```
 #@title
 # http://pytorch.org/
@@ -194,6 +197,7 @@ plt.plot(x.numpy(), y2.numpy(), "b-")
 plt.legend(['$\ell(\cdot)$', '$\gamma(\cdot)$' ])
 plt.show()
 ```
+
 
 </details>
 
