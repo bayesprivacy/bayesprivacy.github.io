@@ -139,7 +139,7 @@ where $$[-\tau; \tau]$$ is the range of $$\gamma(\cdot)$$. The below figure show
   
 <summary>Click to see code</summary>
 
-
+<div markdown="1">
 ```
 #@title
 # http://pytorch.org/
@@ -197,7 +197,7 @@ plt.plot(x.numpy(), y2.numpy(), "b-")
 plt.legend(['$\ell(\cdot)$', '$\gamma(\cdot)$' ])
 plt.show()
 ```
-
+</div>
 
 </details>
 
