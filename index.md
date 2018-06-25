@@ -1,4 +1,4 @@
-<script src="https://distill.pub/template.v1.js"></script>
+<script src="https://storage.googleapis.com/quickdraw-models/sketchRNN/world_models/demo/lib/template.v1.js"></script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
