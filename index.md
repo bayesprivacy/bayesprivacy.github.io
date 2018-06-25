@@ -451,11 +451,14 @@ model {
     y ~ normal(yhat, sigma);
 }
 """
+```
 
 <details>
 <summary>Click to see code</summary>
 <div markdown="1">
 
+
+```python
 ## sm = pystan.StanModel(model_code=linreg_code)
 #@title
 X = data[:, 0:2]
