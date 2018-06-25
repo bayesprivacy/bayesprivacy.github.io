@@ -140,7 +140,7 @@ where $$[-\tau; \tau]$$ is the range of $$\gamma(\cdot)$$. The below figure show
 <summary>Click to see code</summary>
 
 <div markdown="1">
-```
+```python
 #@title
 # http://pytorch.org/
 from os import path
@@ -179,7 +179,7 @@ plt.rcParams['figure.titlesize'] = 16
 
 
 
-```
+```python
 #@title Figure 1. Bounded log-likelihood function
 
 from pylab import rcParams
@@ -265,7 +265,7 @@ $$
 <summary>Click to see code</summary>
 <div markdown="1">
 
-```
+```python
 #@title Generate Data
 import torch
 N = 4000
@@ -313,7 +313,7 @@ _ = plt.scatter(X[:, 1], Y[:,0])
 
 
 
-```
+```python
 #@title Posterior function
 
 def log_prior(theta):
@@ -375,7 +375,7 @@ theta.requires_grad= True
 ```
 
 
-```
+```python
 #@title
 def computeK(p):
     return torch.sum(torch.pow(p,2) / 2.0).data
@@ -434,7 +434,7 @@ print(loss.item())
 
 
 
-```
+```python
 #@title
 print( "a = %f\nb=%f\nintercept=%f\nsigma=%f" % (theta[0,0].item(),
                                                   theta[1,0].item(),
@@ -449,7 +449,7 @@ print( "a = %f\nb=%f\nintercept=%f\nsigma=%f" % (theta[0,0].item(),
 
 
 
-```
+```python
 #@title
 !pip install pystan
 ```
@@ -461,7 +461,7 @@ print( "a = %f\nb=%f\nintercept=%f\nsigma=%f" % (theta[0,0].item(),
 
 
 
-```
+```python
 #@title
 import pystan
 
@@ -502,12 +502,9 @@ dat = {'N':N,
 fit = sm.sampling(data=dat, iter=10000, chains=1)
 ```
 
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/pystan/misc.py:399: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-      elif np.issubdtype(np.asarray(v).dtype, float):
 
 
-
-```
+```python
 #@title
 rcParams['figure.figsize'] = 10,10
 fit.plot()
@@ -527,7 +524,7 @@ mytheta[:, 3]   = torch.from_numpy(samples['sigma'])
 ### Variational Inference
 
 
-```
+```python
 #@title
 
 import torch 
@@ -552,7 +549,7 @@ if isCuda:
 ```
 
 
-```
+```python
 #@title
 X = data[:, 0:2]
 Y = data[:, 2:3]
@@ -595,7 +592,7 @@ def AEVI():
 ```
 
 
-```
+```python
 tau, logsigma = AEVI()
 ```
 
@@ -608,7 +605,7 @@ tau, logsigma = AEVI()
 
 
 
-```
+```python
 #@title
 import seaborn as sns
 name = ["a", "b", "intercept", "sigma"]
@@ -668,7 +665,7 @@ for id in range(4):
 
 
 
-```
+```python
 #@title
 logsigma_bak = logsigma.clone()
 tau_bak = tau.clone()
@@ -677,7 +674,7 @@ tau = tau.data
 ```
 
 
-```
+```python
 #@title
 ### noise = generate_noise(10)
 tau = tau_bak.data # torch.zeros(4, 1, requires_grad=True)
@@ -693,7 +690,7 @@ if isCuda:
 ```
 
 
-```
+```python
 #@title
 #Auto-Encoding Variational Inference - Stochastic Gradient Langevin Dynamics
 def AEVI_SGLD():
@@ -772,7 +769,7 @@ def AEVI_SGLD():
 ```
 
 
-```
+```python
 samples = AEVI_SGLD()
 ```
 
@@ -780,7 +777,7 @@ samples = AEVI_SGLD()
 
 
 
-```
+```python
 #@title
 rcParams['figure.figsize'] = 10,10
 
@@ -796,7 +793,7 @@ for id in range(4):
 
 
 
-```
+```python
 import tensorflow as tf
 import math
 import numpy as np
@@ -837,7 +834,7 @@ def log_pos(X, Y, theta):
 ```
 
 
-```
+```python
 tf.reset_default_graph()
 
 with tf.device('/cpu:0'):
@@ -879,7 +876,7 @@ print(tttheta)
 
 
 
-```
+```python
 #@title
 tf.reset_default_graph()
 
@@ -936,7 +933,7 @@ print(ms)
 
 
 
-```
+```python
 #@title
 tf.reset_default_graph()
 
@@ -1012,7 +1009,7 @@ print(mls)
 
 
 
-```
+```python
 #@title
 tf.reset_default_graph()
 
@@ -1066,7 +1063,7 @@ for i in tqdm.tqdm(range(NN)):
 
 
 
-```
+```python
 #@title
 rcParams['figure.figsize'] = 10,10
 
