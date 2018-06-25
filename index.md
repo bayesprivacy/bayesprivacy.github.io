@@ -970,58 +970,6 @@ print(ms)
 
 
 ```
-#@title Plot hist
-import seaborn as sns
-
-rcParams['figure.figsize'] = 4,3
-
-logsigma = torch.from_numpy(ms.astype(np.float32))
-sigma = torch.exp(logsigma.data)
-
-tau =  torch.from_numpy(mm.astype(np.float32))
-for id in range(4):
-
-    xx = torch.linspace(float(min(mytheta[:, id].numpy())), float(max(mytheta[:, id].numpy())), 100)
-    if id == 3:
-        xx = torch.linspace(math.log(float(min(mytheta[:, id].numpy()))), math.log(float(max(mytheta[:, id].numpy()))), 100)
-        
-    yy =  torch.exp( - 0.5 * torch.pow ( (xx - tau.cpu()[id,0])\
-           / sigma.cpu()[id,0], 2)) / math.sqrt( 2. * math.pi ) \
-    / sigma.cpu()[id,0]
-
-    
-    if id == 3:
-        xx = torch.exp(xx)
-        yy = yy / xx
-        
-    #_ = sns.distplot(mytheta[:, id].numpy(), hist=False)
-
-        
-    _ = plt.plot(xx.cpu().data.numpy(), yy.cpu().data.numpy(), "b-")
-
-    plt.ylabel(name[id])
-    plt.show()
-
-```
-
-
-![png](Variational_Inference_files/Variational_Inference_36_0.png)
-
-
-
-![png](Variational_Inference_files/Variational_Inference_36_1.png)
-
-
-
-![png](Variational_Inference_files/Variational_Inference_36_2.png)
-
-
-
-![png](Variational_Inference_files/Variational_Inference_36_3.png)
-
-
-
-```
 #@title
 tf.reset_default_graph()
 
