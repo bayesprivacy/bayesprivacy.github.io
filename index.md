@@ -1,8 +1,6 @@
+<script src="https://distill.pub/template.v1.js"></script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-
-
-# Differential Privacy for Bayesian Inference
 
 *Abstract*. 
 
@@ -45,12 +43,19 @@ Here, $$\epsilon$$ is called the privacy budget. Low $$\epsilon$$ guarantees str
 
 In this work, $$z$$, which is the extracted information from dataset $$x$$, is actually the parameter vector of the mean field variational distribution $$Q(\theta \mid z)$$. In other words, we aim to guarantee that publishing parameters of the approximated posterior distribution will not compromise the privacy of individuals data record in $$x$$.
 
-There are previous works related to this problem. Wang et al. [1] are the first to prove that sampling a single random sample from the posterior distribution guarantees differential privacy under some conditions. The authors use stochastic gradient Monte-Carlo to sample the posterior distribution. Park et al. [2] proposed that for variational inference with conjugate exponential (CE) family, it is enough for guaranteeing differential privacy by perturbing the expected sufficient statistics of the complete-data likelihood. J{\"a}lk{\"o} et al. [3]  proposed to guarantee differential privacy for variational inference with non-conjugate models by a Gaussian mechanism which adds gaussian noise to the gradient vector at each step of the optimization procedure.   
+There are previous works related to this problem. Wang et al. <dt-cite key="wang2015privacy"></dt-cite> are the first to prove that sampling a single random sample from the posterior distribution guarantees differential privacy under some conditions. The authors use stochastic gradient Monte-Carlo to sample the posterior distribution. Park et al. <dt-cite key="park2016variational"></dt-cite> proposed that for variational inference with conjugate exponential (CE) family, it is enough for guaranteeing differential privacy by perturbing the expected sufficient statistics of the complete-data likelihood. Jalko et al. <dt-cite key="jalko2017differentially"></dt-cite>  proposed to guarantee differential privacy for variational inference with non-conjugate models by a Gaussian mechanism which adds Gaussian noise to the gradient vector at each step of the optimization procedure.   
 
 
+<script type="text/front-matter">
+  title: "Differential Privacy for Bayesian Inference"
+  description: "Using stochastic gradient Langevin dynamics to guarantee differential privacy for variational inference"
+  authors:
+  - Chris Olah: Thông T. Nguyễn
+  affiliations:
+  - Nanyang Technological University: http://www.ntu.edu.sg
+</script>
 
-[1] Privacy for Free: Posterior Sampling and Stochastic Gradient Monte Carlo 
-
+<script type="text/bibliography"> 
 @inproceedings{wang2015privacy,
   title={Privacy for free: Posterior sampling and stochastic gradient monte carlo},
   author={Wang, Yu-Xiang and Fienberg, Stephen and Smola, Alex},
@@ -59,7 +64,6 @@ There are previous works related to this problem. Wang et al. [1] are the first 
   year={2015}
 }
 
-[2] Variational Bayes In Private Settings (VIPS)
 @article{park2016variational,
   title={Variational Bayes in private settings (VIPS)},
   author={Park, Mijung and Foulds, James and Chaudhuri, Kamalika and Welling, Max},
@@ -67,7 +71,6 @@ There are previous works related to this problem. Wang et al. [1] are the first 
   year={2016}
 }
 
-[3] Differentially Private Variational Inference for Non-conjugate Models
 @inproceedings{jalko2017differentially,
   title={Differentially Private Variational Inference for Non-conjugate Models},
   author={J{\"a}lk{\"o}, Joonas and Dikmen, Onur and Honkela, Antti and others},
@@ -75,6 +78,7 @@ There are previous works related to this problem. Wang et al. [1] are the first 
   year={2017},
   organization={The Association for Uncertainty in Artificial Intelligence}
 }
+</script>
 
 ## Method
 
