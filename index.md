@@ -527,39 +527,6 @@ mytheta[:, 3]   = torch.from_numpy(samples['sigma'])
 ### Variational Inference
 
 
-Instead of drawing random samples from the posterior distribution $$P(z \mid x)$$, we could approximate the posterior distribution by a simpler distribution, e.g. Normal distributions. We here approximate the posterior distribution by a family of distributions whose coordinates  are independent Gaussian distributions 
-
-$$ Q(z_i) = \mathcal N(\bar z_i, \sigma_i^2)$$
-
-So $$Q(z) = \prod_{i=1}^d Q(z_i)$$
-
-
-The objective is to choose $$\hat z_i, \sigma_i$$ such that the distance between $$Q(z)$$ and $$P(z \mid x)$$ is minimized. Here, we use the Kullback–Leibler divergence (KLD) to measure the distance.
-
-$$
-\begin{align}
-D_{KL}  \left(Q(z) \| P(z | x) \right)  &= E_{Q}  \left( \log(Q(z)) - \log(P(z \mid x))  \right)\\
-&=  E_{Q}  \left( \log(Q(z)) - \log(P(x \mid z)) - \log(P(z) + \log(P(x))  \right) \\
-&\geq E_Q \left( \log(Q(z)) - \log(P(x \mid z)) - \log(P(z)  \right)
-\end{align}
-$$
-
-
-We here use reparametriczation trick to represent the distribution $$Q(z_i)$$ as follows:
-
-$$
-\begin{align}
-Q(z_i) &= r_i \cdot \sigma_i + \bar z_i \\
-r_i &\sim \mathcal N(0, 1)
-\end{align}
-$$
-
-By doing that, we seperate the stochastis noise $$r_i$$ from parameters $$r_i$$ and $$\bar z_i$$. This allows us to compute the gradient of KLD with respect to these parameters.
-
-We first draw multiple random samples of $$r_i$$ and use these samples to estimate the expectation of the gradient.
-
-
-
 ```
 #@title
 
