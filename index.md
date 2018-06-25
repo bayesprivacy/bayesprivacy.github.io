@@ -15,7 +15,7 @@ Finally, we use stochastic gradient Langevin dynamics to draw a random mean fiel
 
 
 
-The objective of Bayesian inference (previously known as inverse probability) is to compute the posterior distribution of latent parameters given the observed data. Let $$\theta$$ be the parameter vector of the model and $x$ be the observed data. By Bayes' theorem, we have:
+The objective of Bayesian inference (previously known as inverse probability) is to compute the posterior distribution of latent parameters given the observed data. Let $$\theta$$ be the parameter vector of the model and $$x$$ be the observed data. By Bayes' theorem, we have:
 
 $$
 P(\theta \mid x) = \frac{P(x \mid \theta) \times P(\theta)}{P(x)}
@@ -225,7 +225,7 @@ $$
 U(z; x) \approx  \frac 1 L \sum_{i=1}^L  \left(\log\left(P(x \mid \theta_i)\right) + \log\left( P(\theta_i)\right)  - \log\left(Q(\theta_i \mid z)\right)  \right)
 $$
 
-where $$\theta_i = g(z, r_i)$ and $r_i \sim P(r)$$. This approximate allows us to estimate the gradient of $$U(z; x)$$.
+where $$\theta_i = g(z, r_i)$$ and $$r_i \sim P(r)$$. This approximate allows us to estimate the gradient of $$U(z; x)$$.
 
 ## Experiments
 
@@ -410,74 +410,7 @@ for t in tqdm.tqdm(range(100000)):
 
 print(loss.item())
 ```
-
-    
-      0%|          | 0/100000 [00:00<?, ?it/s][A
-      0%|          | 101/100000 [00:00<01:39, 1008.16it/s][A
-      0%|          | 205/100000 [00:00<01:38, 1017.07it/s][A
-      0%|          | 350/100000 [00:00<01:29, 1115.95it/s][A
-      0%|          | 476/100000 [00:00<01:26, 1155.16it/s][A
-      1%|          | 599/100000 [00:00<01:24, 1174.75it/s][A
-      1%|          | 719/100000 [00:00<01:24, 1180.37it/s][A
-      1%|          | 847/100000 [00:00<01:22, 1207.26it/s][A
-      1%|          | 975/100000 [00:00<01:20, 1226.39it/s][A
-      1%|          | 1093/100000 [00:00<01:22, 1200.69it/s][A
-      1%|          | 1212/100000 [00:01<01:22, 1194.87it/s][A
-      1%|▏         | 1330/100000 [00:01<01:23, 1187.72it/s][A
-      1%|▏         | 1456/100000 [00:01<01:21, 1202.83it/s][A
-      2%|▏         | 1576/100000 [00:01<01:26, 1131.70it/s][A
-      2%|▏         | 1690/100000 [00:01<01:26, 1132.56it/s][A
-      2%|▏         | 1833/100000 [00:01<01:21, 1207.73it/s][A
-      2%|▏         | 1956/100000 [00:01<01:24, 1166.83it/s][A
-      2%|▏         | 2074/100000 [00:01<01:24, 1165.30it/s][A
-      2%|▏         | 2209/100000 [00:01<01:20, 1212.96it/s][A
-      2%|▏         | 2332/100000 [00:01<01:23, 1172.26it/s][A
-      2%|▏         | 2451/100000 [00:02<01:25, 1141.55it/s][A
-      3%|▎         | 2567/100000 [00:02<01:25, 1136.61it/s][A
-      3%|▎         | 2692/100000 [00:02<01:23, 1165.41it/s][A
-      3%|▎         | 2810/100000 [00:02<01:25, 1140.63it/s][A
-      3%|▎         | 2925/100000 [00:02<01:26, 1116.70it/s][A
-      3%|▎         | 3038/100000 [00:02<01:27, 1108.91it/s][A
-      3%|▎         | 3155/100000 [00:02<01:26, 1122.80it/s][A
-      3%|▎         | 3277/100000 [00:02<01:24, 1147.47it/s][A
-      3%|▎         | 3393/100000 [00:02<01:25, 1125.19it/s][A
-      4%|▎         | 3506/100000 [00:03<01:26, 1120.53it/s][A
-      4%|▎         | 3619/100000 [00:03<01:27, 1102.73it/s][A
-      4%|▎         | 3743/100000 [00:03<01:24, 1139.36it/s][A
-      4%|▍         | 3858/100000 [00:03<01:24, 1132.05it/s][A
-      4%|▍         | 3972/100000 [00:03<01:26, 1105.09it/s][A
-      4%|▍         | 4089/100000 [00:03<01:25, 1121.67it/s][A
-      4%|▍         | 4208/100000 [00:03<01:24, 1138.31it/s][A
-      4%|▍         | 4324/100000 [00:03<01:23, 1142.46it/s][A
-      4%|▍         | 4443/100000 [00:03<01:22, 1155.41it/s][A
-      5%|▍         | 4566/100000 [00:03<01:21, 1176.16it/s][A
-      5%|▍         | 4684/100000 [00:04<01:27, 1086.96it/s][A
-      5%|▍         | 4797/100000 [00:04<01:26, 1098.93it/s][A
-      5%|▍         | 4908/100000 [00:04<01:28, 1075.23it/s][A
-      5%|▌         | 5017/100000 [00:04<01:28, 1075.76it/s][A
-      5%|▌         | 5133/100000 [00:04<01:26, 1096.26it/s][A
-      5%|▌         | 5244/100000 [00:04<01:28, 1074.92it/s][A
-      5%|▌         | 5352/100000 [00:04<01:36, 978.85it/s] [A
-      5%|▌         | 5465/100000 [00:04<01:32, 1019.37it/s][A
-      6%|▌         | 5577/100000 [00:04<01:30, 1047.14it/s][A
-      6%|▌         | 5684/100000 [00:05<01:29, 1050.47it/s][A
-      6%|▌         | 5795/100000 [00:05<01:28, 1064.42it/s][A
-      6%|▌         | 5916/100000 [00:05<01:25, 1103.22it/s][A
-      6%|▌         | 6028/100000 [00:05<01:31, 1021.70it/s][A
-      6%|▌         | 6144/100000 [00:05<01:28, 1058.81it/s][A
-      6%|▋         | 6254/100000 [00:05<01:27, 1066.89it/s][A
-      6%|▋         | 6373/100000 [00:05<01:25, 1100.76it/s][A
-      6%|▋         | 6493/100000 [00:05<01:22, 1127.99it/s][A
-      7%|▋         | 6607/100000 [00:05<01:23, 1122.34it/s][A
-      7%|▋         | 6723/100000 [00:05<01:22, 1131.31it/s][A
-      7%|▋         | 6842/100000 [00:06<01:21, 1146.57it/s][A
-      7%|▋         | 6958/100000 [00:06<01:21, 1141.59it/s][A
-      7%|▋         | 7074/100000 [00:06<01:21, 1146.70it/s][A
-      7%|▋         | 7190/100000 [00:06<01:20, 1150.28it/s][A
-      7%|▋         | 7318/100000 [00:06<01:18, 1183.91it/s][A
-      7%|▋         | 7437/100000 [00:06<01:18, 1172.62it/s][A
-     87%|████████▋ | 432527/500000 [03:50<00:35, 1880.45it/s]
-     14%|█▍        | 14281/100000 [00:12<01:08, 1254.90it/s]100%|██████████| 100000/100000 [01:16<00:00, 1311.62it/s]
+100%|██████████| 100000/100000 [01:16<00:00, 1311.62it/s]
 
     -1.8227145671844482
 
@@ -579,11 +512,15 @@ mytheta[:, 3]   = torch.from_numpy(samples['sigma'])
 ### Variational Inference
 
 
-Instead of drawing random samples from the posterior distribution $ P(z \mid x)$, we could approximate the posterior distribution by a simpler distribution, e.g. Normal distributions. We here approximate the posterior distribution by a family of distributions whose coordinates  are independent Gaussian distributions $$ Q(z_i) = \mathcal N(\bar z_i, \sigma_i^2)$$
+Instead of drawing random samples from the posterior distribution $$P(z \mid x)$$, we could approximate the posterior distribution by a simpler distribution, e.g. Normal distributions. We here approximate the posterior distribution by a family of distributions whose coordinates  are independent Gaussian distributions 
+
+$$ Q(z_i) = \mathcal N(\bar z_i, \sigma_i^2)$$
+
 So $$Q(z) = \prod_{i=1}^d Q(z_i)$$
 
 
-The objective is to choose $\hat z_i, \sigma_i$ such that the distance between $Q(z)$ and $P(z \mid x)$ is minimized. Here, we use the Kullback–Leibler divergence (KLD) to measure the distance.
+The objective is to choose $$\hat z_i, \sigma_i$$ such that the distance between $$Q(z)$$ and $$P(z \mid x)$$ is minimized. Here, we use the Kullback–Leibler divergence (KLD) to measure the distance.
+
 $$
 \begin{align}
 D_{KL}  \left(Q(z) \| P(z | x) \right)  &= E_{Q}  \left( \log(Q(z)) - \log(P(z \mid x))  \right)\\
@@ -593,7 +530,8 @@ D_{KL}  \left(Q(z) \| P(z | x) \right)  &= E_{Q}  \left( \log(Q(z)) - \log(P(z \
 $$
 
 
-We here use reparametriczation trick to represent the distribution $Q(z_i)$ as follows:
+We here use reparametriczation trick to represent the distribution $$Q(z_i)$$ as follows:
+
 $$
 \begin{align}
 Q(z_i) &= r_i \cdot \sigma_i + \bar z_i \\
@@ -601,9 +539,9 @@ r_i &\sim \mathcal N(0, 1)
 \end{align}
 $$
 
-By doing that, we seperate the stochastis noise $r_i$ from parameters $r_i$ and $\bar z_i$. This allows us to compute the gradient of KLD with respect to these parameters.
+By doing that, we seperate the stochastis noise $$r_i$$ from parameters $$r_i$$ and $$\bar z_i$$. This allows us to compute the gradient of KLD with respect to these parameters.
 
-We first draw multiple random samples of $r_i$ and use these samples to estimate the expectation of the gradient.
+We first draw multiple random samples of $$r_i$$ and use these samples to estimate the expectation of the gradient.
 
 
 
@@ -870,24 +808,6 @@ for id in range(4):
         ss = [ sample[yy][id] for sample in samples if math.isfinite(sample[yy][id])]
         sns.distplot(ss)
 ```
-
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
 
 
 ![png](Variational_Inference_files/Variational_Inference_32_1.png)
@@ -1226,25 +1146,6 @@ for id in range(4):
         ss = [ sample[yy][id] for sample in LLS if not math.isnan(sample[yy][id])]
         sns.distplot(ss)
 ```
-
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/xcode/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
-
 
 ![png](Variational_Inference_files/Variational_Inference_39_1.png)
 
