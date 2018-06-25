@@ -261,6 +261,10 @@ $$
 
 
 
+<details>
+<summary>Click to see code</summary>
+<div markdown="1">
+
 ```
 #@title Generate Data
 import torch
@@ -302,7 +306,8 @@ if isCuda:
 import seaborn as sns
 _ = plt.scatter(X[:, 1], Y[:,0])
 ```
-
+</div>
+</details>
 
 ![png](Variational_Inference_files/Variational_Inference_14_0.png)
 
