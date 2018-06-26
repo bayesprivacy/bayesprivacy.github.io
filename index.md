@@ -27,14 +27,13 @@ $$
 
 However,  this integral is untractable in general. There are two general approaches to tackle this problem: (1) monte carlo markov chain (MCMC) and (2) variational inference (VI).  MCMC algorithm constructs a markov chain whose statationary distribution is $$P(\theta \mid x)$$. Meanwhile, VI approximates $$P(\theta \mid x)$$ by a parametrized  and tractable distribution $$Q(\theta \mid z)$$ such that $$Q(\theta \mid z)$$ is as close as possible to $$P(\theta \mid x)$$.
 
-Here, we aim to protect the privacy of individuals in the dataset, which is essentially the observed data $$x$$. Especially, we aim to guarantee differential privacy for Bayesian inference.  Differential privacy is a robust and mathematical definition of privacy protection which guarantees that each individual's data does not much influent on the useful information which is extracted from the dataset of these individuals. Let $
-$ be the information which is extracted from the dataset $$x$$.  Differential privacy constructs a probability distribution $$P(z \mid x)$$  of $$z$$ given $$x$$. The information, which will be published, is a random sample of this distribution:
+Here, we aim to protect the privacy of individuals in the dataset, which is essentially the observed data $$x$$. Especially, we aim to guarantee differential privacy for Bayesian inference.  Differential privacy is a robust and mathematical definition of privacy protection which guarantees that each individual's data does not much influent on the useful information which is extracted from the dataset of these individuals. Let $$z$$ be the information which is extracted from the dataset $$x$$.  Differential privacy constructs a probability distribution $$P(z \mid x)$$  of $$z$$ given $$x$$. The information, which will be published, is a random sample of this distribution:
 
 $$
 z_{priv} \sim P(z \mid x)
 $$
 
-Differential privacy guarantees that for any two neighbouring datasets$$x$$ and $$x^\prime$$, which differ at only one data record, $$P(z\mid x)$$ and $$P(z \mid x^\prime)$$ are close to each other. Formally, for any neighbouring datasets $$x$$ and $$x^\prime$$, and for any $$z$$:
+Differential privacy guarantees that for any two neighbouring datasets $$x$$ and $$x^\prime$$, which differ at only one data record, $$P(z\mid x)$$ and $$P(z \mid x^\prime)$$ are close to each other. Formally, for any neighbouring datasets $$x$$ and $$x^\prime$$, and for any $$z$$:
 
 $$
 P(z \mid x) \leq \exp(\epsilon) \cdot P(z \mid x^\prime)
