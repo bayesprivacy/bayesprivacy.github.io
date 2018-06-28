@@ -113,7 +113,7 @@ $$
 
 Let $$\ell(\theta; x_i)$$ be the log-likelihood of function of $$i^{th}$$ data record. Then, 
 
-$$ P(x \mid \theta) = \sum_{i=1}^n \ell(\theta; x_i)$$ 
+$$ P(x \mid \theta) = \exp\left(\sum_{i=1}^n \ell(\theta; x_i)\right)$$ 
 
 where $$n$$ is the size of dataset $$x$$. Now, assuming that two neightbouring datasets $$x$$ and $$x^\prime$$ are differ at only $$x_n$$ and $$x^\prime_n$$,
 
